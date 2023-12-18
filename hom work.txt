@@ -1,0 +1,354 @@
+1- the data type of the array elements should be mentioned.
+There has to be a square brackets after the data type or after the the array name.
+The data type should be mentioned after the new key word and the size of the array should be there in side square brackets.
+For example 
+int[] arrays= new int[7]
+—————————
+2-void reverse(int[] a) {
+    int start = 0;
+    int end = a.length - 1;
+    
+    while (start < end) {
+        int temp = a[start];
+        a[start] = a[end];
+        a[end] = temp;
+        
+        start++;
+        end--;
+    }
+}
+—————————
+3-While linked lists have certain advantages over arrays, arrays still have their own strengths :
+*Random Access
+*Memory Efficiency
+*Efficiency in Iteration
+*Lower Memory Overhead
+* Simplicity.
+————-
+4-
+a. True
+b. False
+c. False
+d. True
+e. False
+—————
+5-18
+32
+25
+23
+——————
+6-
+True 
+True 
+False 
+False 
+True
+—————————- 
+7-
+——————————-
+8-
+——————————
+9-a. 
+Output:
+10
+18
+13
+b. 
+Output:
+42
+30
+28
+20
+—————————-
+10-Output:
+38 2 15 45 25 18
+——————————
+11-
+
+——————————
+12-Here's a possible implementation of the sum method in the SingleLinkedList class:
+
+
+public int sum(Node<Integer> list) {
+    int sum = 0;
+    Node<Integer> current = list;
+    while (current != null) {
+        sum += current.getElement();
+        current = current.getNext();
+    }
+    return sum;
+}
+testing 
+
+SingleLinkedList<Integer> list = new SingleLinkedList<>();
+list.addLast(25);
+list.addLast(45);
+list.addLast(65);
+list.addLast(85);
+
+int totalSum = list.sum(list.getHead());
+System.out.println(totalSum); 
+———————————-
+13-
+
+public E removeLast(Node<E> list) {
+    Node<E> current = list;
+    while (current.getNext() != null) {
+        current = current.getNext();
+    }
+    
+    Node<E> previous = current.getPrevious();
+    previous.setNext(null);
+    current.setPrevious(null);
+    
+    return current.getElement();
+}
+
+Test:
+
+DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+list.addLast(22);
+list.addLast(44);
+list.addLast(66);
+list.addLast(88);
+
+Integer removedElement = list.removeLast(list.getHead());
+System.out.println(list); // Output: [22, 44, 66]
+System.out.println(removedElement); // Output: 88
+
+—————————-
+14-
+
+public void append(Node<E> list1, Node<E> list2) {
+    Node<E> current = list1;
+    while (current.getNext() != null) {
+        current = current.getNext();
+    }
+    
+    current.setNext(list2);
+}
+
+
+You can test the append method by creating two SingleLinkedList objects and passing their respective heads to the method:
+
+
+SingleLinkedList<Integer> list1 = new SingleLinkedList<>();
+list1.addLast(22);
+list1.addLast(33);
+list1.addLast(44);
+list1.addLast(55);
+
+SingleLinkedList<Integer> list2 = new SingleLinkedList<>();
+list2.addLast(66);
+list2.addLast(77);
+list2.addLast(88);
+list2.addLast(99);
+
+list1.append(list1.getHead(), list2.getHead());
+System.out.println(list1); // Output: [22, 33, 44, 55, 66, 77, 88, 99]
+
+————————-
+15-
+
+public Node<E> concat(Node<E> list1, Node<E> list2) {
+    Node<E> newList = null;
+    Node<E> current = null;
+
+    Node<E> currentList1 = list1;
+    while (currentList1 != null) {
+        if (newList == null) {
+            newList = new Node<>(currentList1.getElement(), null);
+            current = newList;
+        } else {
+            Node<E> newNode = new Node<>(currentList1.getElement(), null);
+            current.setNext(newNode);
+            current = newNode;
+        }
+        currentList1 = currentList1.getNext();
+    }
+
+    Node<E> currentList2 = list2;
+    while (currentList2 != null) {
+        Node<E> newNode = new Node<>(currentList2.getElement(), null);
+        current.setNext(newNode);
+        current = newNode;
+        currentList2 = currentList2.getNext();
+    }
+
+    return newList;
+}
+
+
+You can test the concat method by creating two SingleLinkedList objects and passing their respective heads to the method:
+
+
+SingleLinkedList<Integer> list1 = new SingleLinkedList<>();
+list1.addLast(22);
+list1.addLast(33);
+list1.addLast(44);
+list1.addLast(55);
+
+SingleLinkedList<Integer> list2 = new SingleLinkedList<>();
+list2.addLast(66);
+list2.addLast(77);
+list2.addLast(88);
+list2.addLast(99);
+
+Node<Integer> concatenatedList = list1.concat(list1.getHead(),
+Node<Integer> current = concatenatedList;
+while (current != null) {
+    System.out.print(current.getElement() + " ");
+    current = current.getNext();
+}
+// Output: 22 33 44 55 66 77 88 99
+
+———————-
+16-
+
+
+public void swap(Node<E> list, int i, int j) {
+    if (i == j) {
+        // No need to perform swap if i and j are the same
+        return;
+    }
+
+    Node<E> nodeI = getNodeAtIndex(list, i);
+    Node<E> nodeJ = getNodeAtIndex(list, j);
+
+    if (nodeI == null || nodeJ == null) {
+        // Invalid indices, cannot perform swap
+        return;
+    }
+
+    E temp = nodeI.getElement();
+    nodeI.setElement(nodeJ.getElement());
+    nodeJ.setElement(temp);
+}
+
+private Node<E> getNodeAtIndex(Node<E> list, int index) {
+    if (index < 0) {
+        // Invalid index
+        return null;
+    }
+
+    Node<E> current = list;
+    int currentIndex = 0;
+    while (current != null && currentIndex < index) {
+        current = current.getNext();
+        currentIndex++;
+    }
+
+    return current;
+}
+
+Testing :
+
+
+DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+list.addLast(22);
+list.addLast(33);
+list.addLast(44);
+list.addLast(55);
+list.addLast(66);
+list.addLast(77);
+list.addLast(88);
+list.addLast(99);
+
+list.swap(list.getHead(), 2, 5);
+System.out.println(list); // Output: [22, 33, 77, 55, 66, 44, 88, 99]
+
+
+—————————-
+17-
+1. Initialize three pointers: previous to null, current to the head of the list (L), and next to null.
+
+2. Iterate through the list, starting from the head (current), until reaching the end (when current becomes null).
+
+3. Within each iteration, update the next pointer to keep track of the next node in the original list. This is necessary because once we reverse the link of current, we need a reference to the next node before the reversal.
+
+4. Reverse the link of current by pointing it to the previous node (previous) instead of the next node (next). This effectively changes the direction of the link.
+
+5. Move the previous pointer to the current node (current) and the current pointer to the next node (next) using the references saved in step 3.
+
+6. Repeat steps 3-5 until reaching the end of the list.
+
+7. Finally, update the head of the list to point to the last node encountered, which is now the first node after reversal. This ensures that the list is properly reversed.
+——————————-
+18-
+
+@Override
+public boolean equals(Object obj) {
+    if (this == obj) {
+        return true;
+    }
+
+    if (!(obj instanceof DoublyLinkedList)) {
+        return false;
+    }
+
+    DoublyLinkedList<?> otherList = (DoublyLinkedList<?>) obj;
+
+    if (size() != otherList.size()) {
+        return false;
+    }
+
+    Node<E> currentThis = getHead();
+    Node<?> currentOther = otherList.getHead();
+
+    while (currentThis != null && currentOther != null) {
+        if (!currentThis.getElement().equals(currentOther.getElement())) {
+            return false;
+        }
+
+        currentThis = currentThis.getNext();
+        currentOther = currentOther.getNext();
+    }
+
+    return true;
+}
+
+———————————
+19-
+
+
+public void rotate() {
+    if (isEmpty() || getHead().getNext() == getHead()) {
+        // No need to rotate if the list is empty or has only one element
+        return;
+    }
+
+    Node<E> newHead = getHead().getNext();
+    Node<E> current = newHead;
+
+    while (current.getNext() != getHead()) {
+        current = current.getNext();
+    }
+
+    current.setNext(getHead());
+    getHead().setNext(null);
+    setHead(newHead);
+}
+``
+——————————-
+20-
+
+
+public void addFirst(E element) {
+    Node<E> newNode = new Node<>(element);
+
+    if (isEmpty()) {
+        newNode.setNext(newNode);
+    } else {
+        newNode.setNext(getHead());
+        Node<E> last = getHead();
+        while (last.getNext() != getHead()) {
+            last = last.getNext();
+        }
+        last.setNext(newNode);
+    }
+
+    setHead(newNode);
+}
+```
+
+———————————-
